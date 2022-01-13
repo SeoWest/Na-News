@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<configuration>
+    <!-- 디버그용 -->
+    <!-- Appenders -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d %5p [%c] %m%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="console-infolog" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d %5p %m%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- 로거 -->
+    <logger name="com.example.demo" level="DEBUG" appender-ref="console"/>
+    <logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog"/>
+    <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog"/>
+
+    <!-- 루트 로거 -->
+    <root level="off">
+        <appender-ref ref="console"/>
+    </root>
+
+
+    <!-- 배포용 -->
+    <!-- Appenders -->
+    <!--<appender name="LOGFILE-DAILY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <param name="file" value="/usr/local/tomcat/logs/nanews.log"/>
+        <param name="Append" value="false" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+        <encoder>
+            <Pattern>%p,%d{yyyy-MM-dd HH:mm:ss},%m%n</Pattern>
+        </encoder>
+    </appender>
+
+    &lt;!&ndash; 로거 &ndash;&gt;
+    <logger name="com.example.demo" level="DEBUG" appender-ref="LOGFILE-DAILY"/>
+
+    &lt;!&ndash; 루트 로거 &ndash;&gt;
+    <root level="info">
+        <appender-ref ref="LOGFILE-DAILY"/>
+    </root>-->
+</configuration>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+    <select id="Login_1" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+            SELECT
+                id, name, mail, pw
+            FROM
+                user_info
+            WHERE
+                id=#{id}
+        ]]>
+    </select>
+    <select id="Login_2" parameterType="hashmap" resultType="hashmap">
+        <![CDATA[
+            SELECT
+                id, mail, name
+            FROM
+                user_info
+            WHERE
+                id=#{id}
+            AND
+                pw=#{pw}
+        ]]>
+    </select>
+
+    <!-- 마이페이지 -->
+    <select id="getUserInfo" resultType="hashmap">
+        <![CDATA[
+            SELECT
+                id, email, name, phone, message
+            FROM
+                member_info
+            WHERE
+                email = #{username}
+        ]]>
+    </select>
+
+    <!-- 이메일 중복확인 -->
+    <select id="getuserall" resultType="hashmap">
+        <![CDATA[
+            SELECT
+                id, email
+            FROM
+                member_info
+        ]]>
+    </select>
+
+    <!-- 마이페이지 프로필 수정 -->
+    <!--<update id="edit_info" parameterType="hashmap">
+        <![CDATA[
+            UPDATE
+                member_info
+            SET
+                email = #{email},
+                phone = #{phone},
+                name = #{name},
+                message = #{message}
+            WHERE
+                email = #{username}
+        ]]>
+    </update>-->
+
+    <!--<update id="edit_info" parameterType="hashmap">
+        <![CDATA[
+            UPDATE
+                board as b
+            JOIN
+                group_info as g
+            ON
+                b.member_no = g.create_name
+            JOIN
+                subscriber_info as s
+            ON
+                g.create_name = s.create_name
+            JOIN
+                member_info m
+            ON
+                s.create_name = m.email
+            SET
+                b.member_no = #{email},
+                s.create_name = #{email},
+                g.create_name = #{email},
+                m.email = #{email},
+                m.phone = #{phone},
+                m.name = #{name},
+                m.message = #{message}
+            WHERE
+                m.email = #{username}
+            AND
+                b.member_no = #{username}
+            AND
+                g.create_name = #{username}
+            AND
+                s.create_name = #{username}
+        ]]>
+    </update>-->
+    <update id="edit_info" parameterType="hashmap">
+        <![CDATA[
+            UPDATE
+                member_info
+            SET
+                email = #{email},
+                phone = #{phone},
+                name = #{name},
+                message = #{message}
+            WHERE
+                email = #{username}
+        ]]>
+    </update>
+
+    <!-- 작성된 뉴스레터 member_no 변경 -->
+    <update id="edit_email_board" parameterType="hashmap">
+        <![CDATA[
+            UPDATE
+                board
+            SET
+                member_no = #{email}
+            WHERE
+                member_no = #{username}
+        ]]>
+    </update>
+
+    <!-- 그룹 create_name 변경 -->
+    <update id="edit_email_group" parameterType="hashmap">
+        <![CDATA[
+            UPDATE
+                group_info
+            SET
+                create_name = #{email}
+            WHERE
+                create_name = #{username}
+        ]]>
+    </update>
+
+    <!-- Subscriber create_name 변경 -->
+    <update id="edit_email_subscriber" parameterType="hashmap">
+        <![CDATA[
+            UPDATE
+                subscriber_info
+            SET
+                create_name = #{email}
+            WHERE
+                create_name = #{username}
+        ]]>
+    </update>
+
+    <!-- 마이페이지 비밀번호 수정 -->
+    <update id="edit_pw" parameterType="hashmap">
+        <![CDATA[
+            UPDATE
+                member_info
+            SET
+                password = #{password}
+            WHERE
+                email = #{username}
+        ]]>
+    </update>
+</mapper>
